@@ -58,3 +58,4 @@ func main(){
 - [ ] Improve the voice system
 - [ ] Improve locking system for events
 - [ ] Facilitate Etcd over HTTPS
+- [ ] Add e2e testing

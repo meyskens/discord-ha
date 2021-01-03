@@ -11,5 +11,5 @@ DiscordHA is not meant for sharding but enables Discord bots to have multiple re
 
 ## Roadmap
 - [ ] Add support for sharded event listeners
-- [ ] Expose the voice system
+- [ ] Improve the voice system
 - [ ] Improve locking system for events

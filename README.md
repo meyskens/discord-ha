@@ -57,3 +57,4 @@ func main(){
 - [ ] Add support for sharded event listeners
 - [ ] Improve the voice system
 - [ ] Improve locking system for events
+- [ ] Facilitate Etcd over HTTPS

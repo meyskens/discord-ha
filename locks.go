@@ -103,19 +103,21 @@ func (h *HAInstance) logLoop() {
 
 // Lock tries to acquire a lock on an event, it will return true if
 // the instance that requests it may process the request.
-func (h *HAInstance) Lock(obj interface{}) (bool, error) {
+func (h *HAInstance) Lock(obj interface{}) (bool, string, error) {
 	if !h.config.HA {
 		// Non HA, development instance probably
-		return true, nil
+		return true, "", nil
 	}
 
 	hash, err := h.getObjectHash(obj)
 	if err != nil {
 		h.config.Log.Printf("Hash error:%q\n", err)
-		return false, err
+		return false, "", err
 	}
 	key := fmt.Sprintf("/locks/%s", hash)
-	return h.lockKey(key, true)
+	goAhead, err := h.lockKey(key, true)
+
+	return goAhead, hash, err
 }
 
 func (h *HAInstance) lockKey(key string, waitForFailure bool) (bool, error) {
@@ -169,18 +171,13 @@ func (h *HAInstance) lockKey(key string, waitForFailure bool) (bool, error) {
 }
 
 // Unlock will release a lock on an event
-func (h *HAInstance) Unlock(obj interface{}) error {
+func (h *HAInstance) Unlock(lockKey string) error {
 	if !h.config.HA {
 		// Non HA, development instance probably
 		return nil
 	}
 
-	hash, err := h.getObjectHash(obj)
-	if err != nil {
-		h.config.Log.Printf("Hash error:%q\n", err)
-		return err
-	}
-	key := fmt.Sprintf("/locks/%s", hash)
+	key := fmt.Sprintf("/locks/%s", lockKey)
 
 	return h.unlockKey(key)
 }

@@ -73,31 +73,40 @@ func (h *HAInstance) AmLeader(ctx context.Context) bool {
 	return bytes.Equal(resp.Kvs[0].Value, []byte(h.name))
 }
 
-func (h *HAInstance) lockUpdateLoop() {
+func (h *HAInstance) lockUpdateLoop(ctx context.Context) {
+	ticker := time.NewTicker(h.config.LockUpdateInterval)
+	defer ticker.Stop()
+
 	for {
-		time.Sleep(h.config.LockUpdateInterval)
-		h.locksMutex.Lock()
-		for _, lease := range h.locks {
-			err := h.keepAlive(lease)
-			if err != nil {
-				h.config.Log.Printf("Etcd keepalive error: %q\n", err)
+		select {
+		case <-ctx.Done():
+			return
+		case <-ticker.C:
+			h.locksMutex.Lock()
+			for _, lease := range h.locks {
+				err := h.keepAlive(lease)
+				if err != nil {
+					h.config.Log.Printf("Etcd keepalive error: %q\n", err)
+				}
 			}
+			h.locksMutex.Unlock()
 		}
-		h.locksMutex.Unlock()
 	}
 }
 
-func (h *HAInstance) logLoop() {
-	c := 0
+func (h *HAInstance) logLoop(ctx context.Context, logInterval time.Duration) {
+	ticker := time.NewTicker(logInterval)
+	defer ticker.Stop()
+
 	for {
-		time.Sleep(time.Minute)
-		h.locksMutex.Lock()
-		c++
-		if c > 100 {
+		select {
+		case <-ctx.Done():
+			return
+		case <-ticker.C:
+			h.locksMutex.Lock()
 			h.config.Log.Printf("I own %d locks\n", len(h.locks))
-			c = 0
+			h.locksMutex.Unlock()
 		}
-		h.locksMutex.Unlock()
 	}
 }
 

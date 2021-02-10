@@ -551,6 +551,19 @@ func (h *HAInstance) AddHandler(handler interface{}) func() {
 
 			v(s, e)
 		}
+	case func(*discordgo.Session, *discordgo.InteractionCreate):
+		wrappedHandler = func(s *discordgo.Session, e *discordgo.InteractionCreate) {
+			ok, key, err := h.Lock(e)
+			if !ok {
+				if err != nil {
+					log.Println(err)
+				}
+				return
+			}
+			defer h.Unlock(key)
+
+			v(s, e)
+		}
 	}
 
 	if wrappedHandler == nil {

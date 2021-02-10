@@ -3,7 +3,7 @@ module github.com/meyskens/discord-ha
 go 1.14
 
 require (
-	github.com/bwmarrin/discordgo v0.22.1-0.20200825144245-8c5ca3de95d7
+	github.com/bwmarrin/discordgo v0.23.3-0.20210210083539-d11a0797e600
 	github.com/coreos/bbolt v1.3.2 // indirect
 	github.com/coreos/etcd v3.3.25+incompatible
 	github.com/coreos/go-semver v0.3.0 // indirect
@@ -30,9 +30,9 @@ require (
 	go.etcd.io/etcd v3.3.25+incompatible
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.16.0 // indirect
-	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0 // indirect
+	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
 	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
-	golang.org/x/sys v0.0.0-20201231184435-2d18734c6014 // indirect
+	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 	golang.org/x/text v0.3.4 // indirect
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	golang.org/x/tools v0.0.0-20191112195655-aa38f8e97acc // indirect
@@ -44,4 +44,9 @@ require (
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
 
-replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
+replace (
+	// adding beta slash commands
+	github.com/bwmarrin/discordgo => github.com/meyskens/discordgo v0.23.3-0.20210210083539-d11a0797e600
+	// etcd fix
+	google.golang.org/grpc => google.golang.org/grpc v1.26.0
+)

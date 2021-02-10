@@ -116,9 +116,9 @@ func New(c *Config) (HA, error) {
 	}()
 
 	//update the locks so they do not die on long lived command runs
-	go s.lockUpdateLoop()
+	go s.lockUpdateLoop(c.Context)
 	if s.config.VerboseLevel >= 1 {
-		go s.logLoop() // lock number of locks every hour
+		go s.logLoop(c.Context, time.Hour) // log number of locks every hour
 	}
 
 	return s, nil

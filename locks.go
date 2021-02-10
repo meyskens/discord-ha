@@ -50,7 +50,7 @@ func (h *HAInstance) ResignLeader(ctx context.Context) error {
 		return err
 	}
 
-	h.isLeader = true
+	h.isLeader = false
 
 	return nil
 }

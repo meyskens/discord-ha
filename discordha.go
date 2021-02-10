@@ -106,7 +106,7 @@ func New(c *Config) (HA, error) {
 	// start DiscordHA leader election
 	go func() {
 		for {
-			s.ElectLeader(c.Context)
+			err := s.ElectLeader(c.Context)
 			if err == nil {
 				break // became the leader, end this Go routine
 			}
@@ -126,5 +126,8 @@ func New(c *Config) (HA, error) {
 
 // Stop should be run when the program terminates
 func (h *HAInstance) Stop() {
-	h.ResignLeader(context.TODO())
+	err := h.ResignLeader(context.TODO())
+	if err != nil {
+		h.config.Log.Println("Error resigning leader", err)
+	}
 }

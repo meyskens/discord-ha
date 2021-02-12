@@ -26,17 +26,17 @@ type HA interface {
 
 	// The following functions are due to change
 
-	// LockVoice locks a voice channel ID, returns true if successful, this function may change soon!
-	LockVoice(channelID string) (bool, error)
-	// UnlockVoice unlocks a voice channel ID, this function may change soon!
-	UnlockVoice(channelID string) error
+	// LockVoice locks a voice channel for a specific module and Guild, returns true if successful, this function may change soon!
+	LockVoice(moduleID, guildID string) (bool, error)
+	// LockVoice locks a voice channel for a specific module and Guild, this function may change soon!
+	UnlockVoice(moduleID, guildID string) error
 	// SendVoiceCommand sends a string command to the instance handling the voice channel
 	// These can be received using WatchVoiceCommands
 	// this function may change soon!
-	SendVoiceCommand(channelID string, command VoiceCommand) error
+	SendVoiceCommand(command VoiceCommand) error
 	// WatchVoiceCommands gives a channel with commands transmitted by SendVoiceCommand
 	// this function may change soon!
-	WatchVoiceCommands(ctx context.Context, channelID string) chan VoiceCommand
+	WatchVoiceCommands(ctx context.Context, moduleID string) chan VoiceCommand
 }
 
 // HA is a helper struct for high available discordgo using etcd

@@ -35,6 +35,8 @@ func (h *HAInstance) ElectLeader(ctx context.Context) error {
 		return err
 	}
 
+	h.config.Log.Println("Became leader")
+
 	h.isLeader = true
 
 	return nil

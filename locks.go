@@ -190,16 +190,21 @@ func (h *HAInstance) Unlock(lockKey string) error {
 
 	key := fmt.Sprintf("/locks/%s", lockKey)
 
-	return h.unlockKey(key)
+	return h.unlockKey(key, 0)
 }
 
-func (h *HAInstance) unlockKey(key string) error {
+func (h *HAInstance) unlockKey(key string, tries int) error {
+	tries++
 	h.keepAlive(h.locks[key]) // keep lock in etcd till it expires so all servers catch up
 	_, err := h.etcd.Put(h.bgContext, key, statusOk, clientv3.WithLease(h.locks[key]))
 	if err != nil {
 		h.config.Log.Printf("Failed to set status OK: %q retrying", err)
-		time.Sleep(5 * time.Second)
-		return h.unlockKey(key)
+		time.Sleep(5 * time.Duration(tries) * time.Second)
+		if tries > 100 {
+			h.config.Log.Printf("Fatal to set status OK: %q not retrying", err)
+		} else {
+			return h.unlockKey(key, tries)
+		}
 	}
 
 	h.locksMutex.Lock()

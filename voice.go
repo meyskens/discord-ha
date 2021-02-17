@@ -24,7 +24,7 @@ func (h *HAInstance) LockVoice(moduleID, guildID string) (bool, error) {
 
 // UnlockVoice unlocks a voice channel ID
 func (h *HAInstance) UnlockVoice(moduleID, guildID string) error {
-	return h.unlockKey(fmt.Sprintf("voice-%s-%s", moduleID, guildID))
+	return h.unlockKey(fmt.Sprintf("voice-%s-%s", moduleID, guildID), 0)
 }
 
 // SendVoiceCommand sends a string command to the instance handling the voice channel

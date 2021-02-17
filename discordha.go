@@ -55,14 +55,15 @@ type HAInstance struct {
 
 // Config contains the configuration for HA
 type Config struct {
-	Session            *discordgo.Session
-	HA                 bool
-	LockUpdateInterval time.Duration
-	LockTTL            time.Duration
-	EtcdEndpoints      []string
-	Context            context.Context
-	Log                log.Logger
-	VerboseLevel       int
+	Session                          *discordgo.Session
+	HA                               bool
+	LockUpdateInterval               time.Duration
+	LockTTL                          time.Duration
+	EtcdEndpoints                    []string
+	Context                          context.Context
+	Log                              log.Logger
+	VerboseLevel                     int
+	DoNotParticipateInLeaderElection bool
 }
 
 // New gives a HA instance for a given configuration
@@ -104,16 +105,18 @@ func New(c *Config) (HA, error) {
 	}
 
 	// start DiscordHA leader election
-	go func() {
-		for {
-			err := s.ElectLeader(c.Context)
-			if err == nil {
-				break // became the leader, end this Go routine
+	if !c.DoNotParticipateInLeaderElection {
+		go func() {
+			for {
+				err := s.ElectLeader(c.Context)
+				if err == nil {
+					break // became the leader, end this Go routine
+				}
+				s.config.Log.Println("Error in etcd leader election", err)
+				time.Sleep(time.Second)
 			}
-			s.config.Log.Println("Error in etcd leader election", err)
-			time.Sleep(time.Second)
-		}
-	}()
+		}()
+	}
 
 	//update the locks so they do not die on long lived command runs
 	go s.lockUpdateLoop(c.Context)

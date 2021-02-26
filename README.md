@@ -1,10 +1,10 @@
 # DiscordHA (Discord High Availability)
 
 DiscordHA is library on to be used together with [discordgo](https://github.com/bwmarrin/discordgo) to deploy Discord bots in high availability.
-This will allow deploying Discord bots with zero-downtime and without the risk of handling events twice. DiscordHA is designed to run in a Kunernetes environment with multiple replica's available. 
-It relies on Etcd as a locking system to prevent events of being received twice, this works in a first locked principle for timestamped events (e.g. messages), and a leader election system for non timestamped events (e.g. reactions).
+This will allow deploying Discord bots with zero-downtime and without the risk of handling events twice. DiscordHA is designed to run in a [Kubernetes](https://kubernetes.io/) environment with multiple replica's available. 
+It relies on [Etcd](https://etcd.io/) as a locking system to prevent events of being received twice, this works in a first locked principle for timestamped events (e.g. messages), and a leader election system for non-timestamped events (e.g. reactions).
 
-DiscordHA is not meant for sharding but enables Discord bots to have multiple replicas wtahcing the same guilds.
+DiscordHA is not meant for sharding but enables Discord bots to have multiple replicas watching the same guilds (servers).
 
 ## Example
 

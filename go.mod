@@ -3,7 +3,7 @@ module github.com/meyskens/discord-ha
 go 1.14
 
 require (
-	github.com/bwmarrin/discordgo v0.23.3-0.20210210083539-d11a0797e600
+	github.com/bwmarrin/discordgo v0.23.3-0.20210314162722-182d9b48f34b
 	github.com/coreos/bbolt v1.3.2 // indirect
 	github.com/coreos/etcd v3.3.25+incompatible
 	github.com/coreos/go-semver v0.3.0 // indirect
@@ -44,9 +44,5 @@ require (
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
 
-replace (
-	// adding beta slash commands
-	github.com/bwmarrin/discordgo => github.com/meyskens/discordgo v0.23.3-0.20210210083539-d11a0797e600
-	// etcd fix
-	google.golang.org/grpc => google.golang.org/grpc v1.26.0
-)
+// etcd fix
+replace google.golang.org/grpc => google.golang.org/grpc v1.26.0

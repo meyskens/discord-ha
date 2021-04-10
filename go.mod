@@ -3,7 +3,7 @@ module github.com/meyskens/discord-ha
 go 1.14
 
 require (
-	github.com/bwmarrin/discordgo v0.23.3-0.20210314162722-182d9b48f34b
+	github.com/bwmarrin/discordgo v0.23.3-0.20210409193405-843c765ae3ee
 	github.com/coreos/bbolt v1.3.2 // indirect
 	github.com/coreos/etcd v3.3.25+incompatible
 	github.com/coreos/go-semver v0.3.0 // indirect

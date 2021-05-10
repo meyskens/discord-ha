@@ -9,6 +9,8 @@ github.com/bwmarrin/discordgo v0.23.3-0.20210314162722-182d9b48f34b h1:hS1GR/OTQ
 github.com/bwmarrin/discordgo v0.23.3-0.20210314162722-182d9b48f34b/go.mod h1:c1WtWUGN6nREDmzIpyTp/iD3VYt4Fpx+bVyfBG7JE+M=
 github.com/bwmarrin/discordgo v0.23.3-0.20210409193405-843c765ae3ee h1:2oVUAha8ngaB5w9fFmnE67aI98KTafGRmgYlBruZ8CA=
 github.com/bwmarrin/discordgo v0.23.3-0.20210409193405-843c765ae3ee/go.mod h1:c1WtWUGN6nREDmzIpyTp/iD3VYt4Fpx+bVyfBG7JE+M=
+github.com/bwmarrin/discordgo v0.23.3-0.20210506151729-0f05488fa0b3 h1:PKK3rejQojNzB/HwAVhgEtmFELytuAjE1wcamVajN0o=
+github.com/bwmarrin/discordgo v0.23.3-0.20210506151729-0f05488fa0b3/go.mod h1:OMKxbTmkKofBjBi4/yidO3ItxbJ6PUfEUkjchM4En8c=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/coreos/bbolt v1.3.2 h1:wZwiHHUieZCquLkDL0B8UhzreNWsPHooDAG3q34zk0s=
 github.com/coreos/bbolt v1.3.2/go.mod h1:iRUV2dpdMOn7Bo10OQBFzIJO9kkE559Wcmn+qkEiiKk=

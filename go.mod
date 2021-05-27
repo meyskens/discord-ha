@@ -16,7 +16,6 @@ require (
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/google/btree v1.0.0 // indirect
 	github.com/google/uuid v1.1.3 // indirect
-	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.0.1-0.20190118093823-f849b5445de4 // indirect
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.9.5 // indirect
@@ -44,5 +43,9 @@ require (
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
 
-// etcd fix
-replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
+replace (
+	// pull buttons code
+	github.com/bwmarrin/discordgo v0.23.2 => github.com/meyskens/discordgo v0.23.3-0.20210527115245-354a2cda7019
+	// etcd fix
+	google.golang.org/grpc => google.golang.org/grpc v1.26.0
+)

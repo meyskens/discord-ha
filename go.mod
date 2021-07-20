@@ -43,7 +43,7 @@ require (
 
 replace (
 	// pull buttons code
-	github.com/bwmarrin/discordgo v0.23.2 => github.com/meyskens/discordgo v0.23.3-0.20210527115245-354a2cda7019
+	github.com/bwmarrin/discordgo v0.23.2 => github.com/meyskens/discordgo v0.23.3-0.20210720154326-5205dc0f9f03
 	// etcd fix
 	google.golang.org/grpc => google.golang.org/grpc v1.26.0
 )

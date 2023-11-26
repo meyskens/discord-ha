@@ -278,19 +278,6 @@ func (h *HAInstance) AddHandler(handler interface{}) func() {
 
 			v(s, e)
 		}
-	case func(*discordgo.Session, *discordgo.MessageAck):
-		wrappedHandler = func(s *discordgo.Session, e *discordgo.MessageAck) {
-			ok, key, err := h.Lock(e)
-			if !ok {
-				if err != nil {
-					log.Println(err)
-				}
-				return
-			}
-			defer h.Unlock(key)
-
-			v(s, e)
-		}
 	case func(*discordgo.Session, *discordgo.MessageCreate):
 		wrappedHandler = func(s *discordgo.Session, e *discordgo.MessageCreate) {
 			ok, key, err := h.Lock(e)
@@ -408,32 +395,6 @@ func (h *HAInstance) AddHandler(handler interface{}) func() {
 		}
 	case func(*discordgo.Session, *discordgo.Ready):
 		wrappedHandler = v // this should be sent to all instances
-	case func(*discordgo.Session, *discordgo.RelationshipAdd):
-		wrappedHandler = func(s *discordgo.Session, e *discordgo.RelationshipAdd) {
-			ok, key, err := h.Lock(e)
-			if !ok {
-				if err != nil {
-					log.Println(err)
-				}
-				return
-			}
-			defer h.Unlock(key)
-
-			v(s, e)
-		}
-	case func(*discordgo.Session, *discordgo.RelationshipRemove):
-		wrappedHandler = func(s *discordgo.Session, e *discordgo.RelationshipRemove) {
-			ok, key, err := h.Lock(e)
-			if !ok {
-				if err != nil {
-					log.Println(err)
-				}
-				return
-			}
-			defer h.Unlock(key)
-
-			v(s, e)
-		}
 	case func(*discordgo.Session, *discordgo.Resumed):
 		wrappedHandler = func(s *discordgo.Session, e *discordgo.Resumed) {
 			ok, key, err := h.Lock(e)
@@ -449,45 +410,6 @@ func (h *HAInstance) AddHandler(handler interface{}) func() {
 		}
 	case func(*discordgo.Session, *discordgo.TypingStart):
 		wrappedHandler = func(s *discordgo.Session, e *discordgo.TypingStart) {
-			ok, key, err := h.Lock(e)
-			if !ok {
-				if err != nil {
-					log.Println(err)
-				}
-				return
-			}
-			defer h.Unlock(key)
-
-			v(s, e)
-		}
-	case func(*discordgo.Session, *discordgo.UserGuildSettingsUpdate):
-		wrappedHandler = func(s *discordgo.Session, e *discordgo.UserGuildSettingsUpdate) {
-			ok, key, err := h.Lock(e)
-			if !ok {
-				if err != nil {
-					log.Println(err)
-				}
-				return
-			}
-			defer h.Unlock(key)
-
-			v(s, e)
-		}
-	case func(*discordgo.Session, *discordgo.UserNoteUpdate):
-		wrappedHandler = func(s *discordgo.Session, e *discordgo.UserNoteUpdate) {
-			ok, key, err := h.Lock(e)
-			if !ok {
-				if err != nil {
-					log.Println(err)
-				}
-				return
-			}
-			defer h.Unlock(key)
-
-			v(s, e)
-		}
-	case func(*discordgo.Session, *discordgo.UserSettingsUpdate):
-		wrappedHandler = func(s *discordgo.Session, e *discordgo.UserSettingsUpdate) {
 			ok, key, err := h.Lock(e)
 			if !ok {
 				if err != nil {

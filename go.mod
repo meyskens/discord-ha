@@ -1,9 +1,9 @@
 module github.com/meyskens/discord-ha
 
-go 1.21
+go 1.25.1
 
 require (
-	github.com/bwmarrin/discordgo v0.27.2-0.20240104191117-afc57886f91a
+	github.com/bwmarrin/discordgo v0.29.0
 	github.com/coreos/etcd v3.3.25+incompatible
 	go.etcd.io/etcd v3.3.25+incompatible
 )
